@@ -1,0 +1,83 @@
+:root {
+    --main-bg: #000000;
+    --highlight-blue: #1ca7ec; /* Peacock Blue */
+    --highlight-green: #00ff00; /* Hacker Green */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-color: var(--main-bg);
+}
+
+header {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+nav a {
+    color: var(--highlight-blue);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: var(--highlight-green);
+}
+
+section {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: #111111;
+    padding: 2rem;
+    border: 2px solid var(--highlight-blue);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--highlight-green);
+}
+
+form input, form textarea {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px solid var(--highlight-blue);
+    background: #222;
+    color: white;
+}
+
+form button {
+    padding: 0.5rem 1rem;
+    background: var(--highlight-blue);
+    border: none;
+    color: black;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+form button:hover {
+    background: var(--highlight-green);
+}
