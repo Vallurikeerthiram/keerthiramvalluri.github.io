@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VKR - Classified Terminal Access</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <!-- Boot Sequence Loading Screen -->
+    <div id="boot-screen" class="boot-screen">
+        <div class="boot-content">
+            <div class="system-logo">
+                <div class="logo-glitch">VALLURI KEERTHI RAM</div>
+                <div class="logo-subtitle">CLASSIFIED TERMINAL ACCESS</div>
+            </div>
+            <div class="boot-progress">
+                <div class="boot-text">
+                    <div class="boot-line">Initializing secure connection...</div>
+                    <div class="boot-line">Loading encryption protocols...</div>
+                    <div class="boot-line">Verifying agent credentials...</div>
+                    <div class="boot-line">Access granted. Welcome, Agent.</div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="boot-progress"></div>
+                </div>
+            </div>
+        </div>
+        <div class="matrix-rain" id="matrix-bg"></div>
+    </div>
+
+    <!-- Main Terminal Interface -->
+    <div id="terminal-container" class="terminal-container hidden">
+        <!-- Matrix Background -->
+        <canvas id="matrix-canvas" class="matrix-canvas"></canvas>
+        
+        <!-- Terminal Header -->
+        <div class="terminal-header">
+            <div class="terminal-title">
+                <span class="terminal-prompt">AGENT@VKR:~$</span>
+                <span class="connection-status">SECURE CONNECTION ESTABLISHED</span>
+            </div>
+             <div class="system-info" onclick="window.location.href='index.html'" style="cursor: pointer;">
+                <span class="timestamp" id="current-time"></span>
+                <span class="security-level">Portfolio Mode</span>
+            </div>
+        </div>
+
+        <!-- Terminal Output Area -->
+        <div class="terminal-output" id="terminal-output">
+            <div class="welcome-banner">
+                <pre class="ascii-art">
+  ██╗   ██╗██╗  ██╗██████╗ 
+  ██║   ██║██║ ██╔╝██╔══██╗
+  ██║   ██║█████╔╝ ██████╔╝
+  ╚██╗ ██╔╝██╔═██╗ ██╔══██╗
+   ╚████╔╝ ██║  ██╗██║  ██║
+    ╚═══╝  ╚═╝  ╚═╝╚═╝  ╚═╝
+                </pre>
+                <div class="welcome-text">
+                    <div class="scan-line"></div>
+                    <p class="typing-text">CLASSIFIED PERSONNEL FILE - VALLURI KEERTHI RAM</p>
+                    <p class="agent-status">STATUS: ACTIVE • CLEARANCE LEVEL: 8.49 • MISSION: SOFTWARE DEVELOPMENT</p>
+                    <p class="system-prompt">Type 'help' for available commands or ask Agent any question about VKR</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Input -->
+        <div class="terminal-input-container">
+            <span class="prompt">agent@vkr:~$ </span>
+            <input type="text" id="terminal-input" class="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+            <span class="cursor-blink">█</span>
+        </div>
+
+        <!-- Command Suggestions -->
+        <div class="command-suggestions" id="command-suggestions"></div>
+    </div>
+
+    <!-- Mobile Virtual Keyboard -->
+    <div class="mobile-keyboard" id="mobile-keyboard">
+        <div class="keyboard-header">
+            <span>Virtual Keyboard</span>
+            <button class="keyboard-close" onclick="toggleMobileKeyboard()">&times;</button>
+        </div>
+        <div class="keyboard-grid">
+            <button class="key-btn" data-key="help">help</button>
+            <button class="key-btn" data-key="about">about</button>
+            <button class="key-btn" data-key="projects">projects</button>
+            <button class="key-btn" data-key="skills">skills</button>
+            <button class="key-btn" data-key="certifications">certifications</button>
+            <button class="key-btn" data-key="contact">contact</button>
+            <button class="key-btn" data-key="clear">clear</button>
+            <button class="key-btn" data-key="matrix">matrix</button>
+            <button class="key-btn" data-key="hack">hack</button>
+            <button class="key-btn" data-key="theme green">theme</button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-toggle" onclick="toggleMobileKeyboard()">
+        <span>⌨️</span>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="typing-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJmqFbqDhY5tZGSZqJ61hZWLZV1zZZOrJLCDm454Y2iZq5O4hoGMYmJpZJOlOquGjpNsX3GeqZG1hY+HbmNjmaKRtIaGf250YW2YpZG3hoOFa2RmZZajKLWFhHxwY1qUpZO3hoJ/b2djZZOlHbCGh4NvXWuYqpi2ho6BcmZhZ5emLbCMgH1sZGGNqJW2gH+EeWFsYW6ZpJO6h4WBbGNmnZaZtJOAAGJ/nmJjnYygn4+chXpnpX5+a3CDZ3VneGF1YnmLt2SFqYOGYGd7nnhdaW2btaKRho6JfGNrY3OTpY62gJCFcGVpYpOoJrSOkoN2XWqYrJa4hIeDbGFrmKaRtoa..." type="audio/wav">
+    </audio>
+
+    <!-- Glitch Overlay -->
+    <div class="glitch-overlay" id="glitch-overlay"></div>
+
+    <script src="app1.js"></script>
+</body>
+</html>
