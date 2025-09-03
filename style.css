@@ -1677,7 +1677,7 @@ select.form-control {
 .skill-star[data-skill="GitHub"] { border-color: #181717; color: #fff; }
 
 .skill-star:hover {
-    transform: scale(1.2) rotateZ(5deg);
+    transform: scale(1.2) ;
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 20px currentColor;
 }
