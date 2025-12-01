@@ -1732,7 +1732,7 @@ function quantumNavigate(sectionId) {
     });
 }
 
-// Communication Protocols (Form Handling) - FIXED
+// Communication Protocols (Form Handling) - Sends to email via Formspree
 function initializeCommunicationProtocols() {
     const form = document.getElementById('contactForm');
     if (!form) return;
@@ -1743,7 +1743,7 @@ function initializeCommunicationProtocols() {
     });
 }
 
-// Quantum Message Transmission (FIXED)
+// Quantum Message Transmission - Sends to bl.en.u4cse23061@bl.students.amrita.edu via Formspree
 async function handleQuantumTransmission(form) {
     const formData = new FormData(form);
     const data = {
@@ -1770,37 +1770,56 @@ async function handleQuantumTransmission(form) {
     // Create transmission effect
     createTransmissionEffect(submitBtn);
     
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 800));
     btnText.textContent = 'Encrypting Message...';
     
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    btnText.textContent = 'Transmitting...';
+    await new Promise(resolve => setTimeout(resolve, 800));
+    btnText.textContent = 'Transmitting to mailbox...';
     
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Success animation
-    btnText.textContent = 'Transmission Complete!';
-    submitBtn.style.background = '#32a852';
-    submitBtn.style.borderColor = '#32a852';
-    
-    displayQuantumAlert('Quantum message transmitted successfully! Response expected within 24 hours.', 'success');
-    
-    // Reset form with animation
-    gsap.to(form, {
-        duration: 0.5,
-        scale: 0.95,
-        opacity: 0.7,
-        ease: "power2.out",
-        onComplete: () => {
-            form.reset();
+    try {
+        // Send form data to Formspree
+        const response = await fetch('https://formspree.io/f/bl.en.u4cse23061@bl.students.amrita.edu', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            // Success animation
+            btnText.textContent = 'Transmission Complete!';
+            submitBtn.style.background = '#32a852';
+            submitBtn.style.borderColor = '#32a852';
+            
+            displayQuantumAlert('Message transmitted successfully to mailbox! Response expected within 24 hours.', 'success');
+            
+            // Reset form with animation
             gsap.to(form, {
                 duration: 0.5,
-                scale: 1,
-                opacity: 1,
-                ease: "back.out(1.7)"
+                scale: 0.95,
+                opacity: 0.7,
+                ease: "power2.out",
+                onComplete: () => {
+                    form.reset();
+                    gsap.to(form, {
+                        duration: 0.5,
+                        scale: 1,
+                        opacity: 1,
+                        ease: "back.out(1.7)"
+                    });
+                }
             });
+        } else {
+            throw new Error('Transmission failed');
         }
-    });
+    } catch (error) {
+        // Error handling
+        btnText.textContent = 'Transmission Failed';
+        submitBtn.style.background = '#ef4444';
+        submitBtn.style.borderColor = '#ef4444';
+        displayQuantumAlert('Transmission error. Please try again or contact directly via email.', 'error');
+    }
     
     // Reset button after delay
     setTimeout(() => {
