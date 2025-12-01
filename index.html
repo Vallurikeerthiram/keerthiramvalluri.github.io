@@ -441,8 +441,7 @@
                 </div>
                     <form class="contact-form" id="contactForm"
                           action="https://formsubmit.co/keerthiramvalluri@gmail.com"
-                          method="POST"
-                          onsubmit="sendForm(event, this)">
+                          method="POST">
                     
                         <!-- FormSubmit hidden settings -->
                         <input type="hidden" name="_captcha" value="false">
@@ -480,26 +479,6 @@
                     </form>
                     
                     
-                    <script>
-                    function sendForm(event, form) {
-                        event.preventDefault(); // STOP default submission
-                    
-                        const data = new FormData(form);
-                    
-                        fetch(form.action, {
-                            method: "POST",
-                            body: data
-                        })
-                        .then(() => {
-                            alert("Message sent successfully!");
-                            form.reset();
-                        })
-                        .catch(() => {
-                            alert("Something went wrong. Try again later.");
-                        });
-                    }
-                    </script>
-
 
             </div>
         </div>
